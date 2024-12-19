@@ -52,6 +52,7 @@ class GitLabRepositoryReader(BaseReader):
         file_path: Optional[str] = None,
         path: Optional[str] = None,
         recursive: bool = False,
+        get_all: bool = False,
     ) -> List[Document]:
         """
         Load data from a GitLab repository.
@@ -61,6 +62,7 @@ class GitLabRepositoryReader(BaseReader):
             file_path: Path to the file to load.
             path: Path to the directory to load.
             recursive: Whether to load files recursively.
+            get_all (bool, optional): If the files are more than 20. https://python-gitlab.readthedocs.io/en/stable/api-usage.html#pagination
 
         Returns:
             List[Document]: List of documents loaded from the repository
@@ -74,6 +76,7 @@ class GitLabRepositoryReader(BaseReader):
             "ref": ref,
             "path": path,
             "recursive": recursive,
+            "get_all": get_all
         }
 
         filtered_params = {k: v for k, v in params.items() if v is not None}
